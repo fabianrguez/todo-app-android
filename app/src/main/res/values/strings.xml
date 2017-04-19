@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">FirebaseTest</string>
+    <string name="app_name">To-Do App</string>
     <string name="msg_add_element">Añadir elementos</string>
 </resources>
