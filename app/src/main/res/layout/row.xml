@@ -6,7 +6,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
@@ -31,4 +30,5 @@
         android:src="@drawable/ic_done_black_36dp"
         android:visibility="invisible"
         app:srcCompat="?android:attr/textCheckMark"/>
+
 </LinearLayout>
