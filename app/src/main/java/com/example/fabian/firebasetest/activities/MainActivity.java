@@ -7,11 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.fabian.firebasetest.R;
 
+import com.example.fabian.firebasetest.ToDoApp;
 import com.example.fabian.firebasetest.adapters.ToDoItemsRecyclerAdapter;
 import com.example.fabian.firebasetest.models.ToDoItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("items");
+        ToDoApp app = (ToDoApp) getApplicationContext();
+        databaseReference = app.getItemsReference();
 
         adapter = new ToDoItemsRecyclerAdapter(R.layout.row, databaseReference);
 
