@@ -10,12 +10,14 @@ public class ToDoItem implements Serializable{
     private String item;
     private boolean completed;
     private String date;
+    private long ref;
 
     public ToDoItem() {}
 
     public ToDoItem(String item) {
         this.item = item;
         this.date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+        this.ref = System.currentTimeMillis();
     }
 
     public String getItem() {
@@ -40,5 +42,13 @@ public class ToDoItem implements Serializable{
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getRef() {
+        return ref;
+    }
+
+    public void setRef(long ref) {
+        this.ref = ref;
     }
 }
