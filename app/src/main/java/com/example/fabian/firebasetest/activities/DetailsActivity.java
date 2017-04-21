@@ -1,7 +1,6 @@
 package com.example.fabian.firebasetest.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,6 @@ import butterknife.OnClick;
 import com.example.fabian.firebasetest.R;
 import com.example.fabian.firebasetest.ToDoApp;
 import com.example.fabian.firebasetest.models.ToDoItem;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.*;
 
 import java.util.HashMap;
@@ -55,14 +53,14 @@ public class DetailsActivity extends AppCompatActivity {
     public void deleteItemFromFirebase() {
         getItemAndDelete();
         Toast.makeText(getApplicationContext(), "Eliminando " + currentItem.getItem(), Toast.LENGTH_LONG).show();
-        returnToMainActivity();
+        finishActivity();
     }
 
     @OnClick(R.id.done_button)
     public void updateCompletedItem() {
         getItemAndUpdate();
         Toast.makeText(getApplicationContext(), "Item '" + currentItem.getItem() + "' actualizado.", Toast.LENGTH_LONG).show();
-        returnToMainActivity();
+        finishActivity();
     }
 
     private void getItemAndDelete() {
@@ -138,8 +136,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void returnToMainActivity() {
-        Intent mainActivity = new Intent(applicationContext, MainActivity.class);
-        applicationContext.startActivity(mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    public void finishActivity() {
+        finish();
     }
 }
