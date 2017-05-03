@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import com.example.fabian.firebasetest.R;
 import com.example.fabian.firebasetest.models.ToDoItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -78,9 +80,16 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
         @Override
         public boolean onLongClick(View view) {
             int position = getAdapterPosition();
+            //DatabaseReference reference = getRef(position);
+            //reference.removeValue();
+            return true;
+        }
+
+        @OnClick(R.id.delete_button)
+        public void deleteItem() {
+            int position = getAdapterPosition();
             DatabaseReference reference = getRef(position);
             reference.removeValue();
-            return true;
         }
     }
 }
