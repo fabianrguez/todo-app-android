@@ -1,22 +1,15 @@
 package com.example.fabian.firebasetest.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Parcelable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.example.fabian.firebasetest.R;
-import com.example.fabian.firebasetest.activities.DetailsActivity;
 import com.example.fabian.firebasetest.models.ToDoItem;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -43,12 +36,9 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
         viewHolder.txtItem.setText(itemDescription);
 
         if(model.isCompleted()) {
-            //viewHolder.imgDone.setVisibility(View.VISIBLE);
-            viewHolder.cardView.setCardBackgroundColor(Color.GREEN);
-            System.out.println("Set green color");
+            viewHolder.doneLine.setBackgroundColor(Color.GREEN);
         } else {
-            viewHolder.cardView.setCardBackgroundColor(Color.WHITE);
-            System.out.println("Set white color");
+            viewHolder.doneLine.setBackgroundColor(Color.LTGRAY);
         }
     }
 
@@ -59,11 +49,8 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
         @Bind(R.id.txtItem)
         TextView txtItem;
 
-        @Bind(R.id.imgDone)
-        ImageView imgDone;
-
-        @Bind(R.id.cardView)
-        CardView cardView;
+        @Bind(R.id.done_line)
+        View doneLine;
 
         public ToDoItemViewHolder(View itemView) {
             super(itemView);
@@ -77,10 +64,6 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
         public void onClick(View view) {
             int position = getAdapterPosition();
             ToDoItem currentItem = getItem(position);
-            //Intent detailsView = new Intent(applicationContext, DetailsActivity.class);
-            //detailsView.putExtra("itemInfo", currentItem);
-            //detailsView.putExtra("itemPosition", position);
-            //applicationContext.startActivity(detailsView);
             DatabaseReference reference = getRef(position);
             boolean completed = !currentItem.isCompleted();
 

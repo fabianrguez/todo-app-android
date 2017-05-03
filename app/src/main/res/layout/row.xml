@@ -17,6 +17,19 @@
         card_view:cardElevation="6dp"
         card_view:cardBackgroundColor="@color/white">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:id="@+id/done_line"/>
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,16 +41,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Large Medium"
                 android:id="@+id/txtItem" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgDone"
-                android:src="@drawable/ic_done_black_36dp"
-                android:visibility="invisible"
-                android:layout_toRightOf="@+id/txtItem"
-                android:layout_alignParentRight="true"
-                app:srcCompat="?android:attr/textCheckMark"/>
 
         </RelativeLayout>
 
