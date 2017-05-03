@@ -36,11 +36,21 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/txtItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentBottom="false"
                 android:text="Large Medium"
-                android:id="@+id/txtItem" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/date_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtItem"
+                android:layout_marginTop="14dp"
+                android:text="TextView" />
 
         </RelativeLayout>
 

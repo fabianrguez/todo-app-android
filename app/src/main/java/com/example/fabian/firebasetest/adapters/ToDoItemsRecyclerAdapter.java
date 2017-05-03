@@ -31,9 +31,8 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
 
     @Override
     protected void populateViewHolder(ToDoItemViewHolder viewHolder, ToDoItem model, int position) {
-        String itemDescription = model.getItem();
-
-        viewHolder.txtItem.setText(itemDescription);
+        viewHolder.txtItem.setText(model.getItem());
+        viewHolder.dateField.setText(model.getDate());
 
         if(model.isCompleted()) {
             viewHolder.doneLine.setBackgroundColor(Color.GREEN);
@@ -51,6 +50,9 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
 
         @Bind(R.id.done_line)
         View doneLine;
+
+        @Bind(R.id.date_field)
+        TextView dateField;
 
         public ToDoItemViewHolder(View itemView) {
             super(itemView);
