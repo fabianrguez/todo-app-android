@@ -1,7 +1,10 @@
 package com.example.fabian.firebasetest.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +46,7 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
         }
     }
 
-    class ToDoItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    class ToDoItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Context applicationContext;
 
@@ -60,7 +63,6 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
             super(itemView);
             applicationContext = itemView.getContext();
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
             ButterKnife.bind(this, itemView);
         }
 
@@ -77,19 +79,26 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
             reference.updateChildren(updates);
         }
 
-        @Override
-        public boolean onLongClick(View view) {
-            int position = getAdapterPosition();
-            //DatabaseReference reference = getRef(position);
-            //reference.removeValue();
-            return true;
-        }
-
         @OnClick(R.id.delete_button)
         public void deleteItem() {
-            int position = getAdapterPosition();
-            DatabaseReference reference = getRef(position);
-            reference.removeValue();
+            AlertDialog.Builder builder = new AlertDialog.Builder(applicationContext);
+            builder.setTitle("¿Estás seguro/a de eliminar el item?")
+                   .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    int position = getAdapterPosition();
+                    DatabaseReference reference = getRef(position);
+                    reference.removeValue();
+                }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 }
