@@ -53,13 +53,13 @@
                 android:text="TextView" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/edit_button"
                 android:layout_width="20dp"
                 android:layout_height="70dp"
-                android:layout_marginEnd="15dp"
-                app:srcCompat="@drawable/edit_icon"
                 android:layout_alignTop="@+id/delete_button"
-                android:layout_toStartOf="@+id/delete_button" />
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@+id/delete_button"
+                app:srcCompat="@drawable/edit_icon" />
 
             <ImageView
                 android:id="@+id/delete_button"

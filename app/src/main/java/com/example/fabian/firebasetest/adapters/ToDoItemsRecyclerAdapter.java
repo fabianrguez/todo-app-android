@@ -6,9 +6,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -92,6 +94,40 @@ public class ToDoItemsRecyclerAdapter extends FirebaseRecyclerAdapter<ToDoItem, 
                 }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        @OnClick(R.id.edit_button)
+        public void editItem() {
+            final int position = getAdapterPosition();
+            final ToDoItem currentItem = getItem(position);
+
+            final EditText editItem = new EditText(applicationContext);
+            editItem.setSelectAllOnFocus(true);
+            editItem.setText(currentItem.getItem());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(applicationContext);
+            builder
+                    .setView(editItem)
+                    .setTitle("Editando item")
+                    .setCancelable(true)
+                    .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DatabaseReference reference = getRef(position);
+                            currentItem.setItem(editItem.getText().toString());
+                            Map<String, Object> update = new HashMap<>();
+                            update.put("item", currentItem.getItem());
+                            reference.updateChildren(update);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
